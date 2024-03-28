@@ -1,25 +1,15 @@
 import express from "express";
 import bodyparser from "body-parser";
-
-const app = express();
-
+import AddRouter from "./routers/Addrouter.js";
+import ShowRouter from "./routers/showproduct.js";
+let app = express();
 app.use(bodyparser.urlencoded({ extended: false }));
 
-const add_productrouter = (req, res) => {
-  return res.send(
-    "<html><form action='/product' method='post'><input name='username' placeholder='please put your name here'></input><button>Add</button></form></html>"
-  );
-};
-
-app.get("/add_product", add_productrouter);
-
-const showtheproduct = (req, res) => {
-  console.log(req.body);
-  res.send("Product added successfully!");
-};
-
-app.post("/product", showtheproduct);
-
+app.use(AddRouter);
+app.use(ShowRouter);
+app.use((req, res, next) => {
+  return res.status(404).send("<h1>Page is Not Found</h1>");
+});
 app.listen(3000, () => {
   console.log("Your server is listening at port 3000");
 });
