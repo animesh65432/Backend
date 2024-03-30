@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -12,11 +12,10 @@ router.get("/", (req, res) => {
         document.getElementById("loginForm").addEventListener("submit", function(event) {
           event.preventDefault();
           localStorage.setItem("username", document.getElementById("username").value);
-          this.submit();
         });
       </script>
     </html>
   `);
 });
 
-export default router;
+module.exports = router;
